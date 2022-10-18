@@ -1,23 +1,33 @@
 package ru.vorobev.marketautumn.service;
 
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.vorobev.marketautumn.dto.Product;
 import ru.vorobev.marketautumn.repository.ProductRepository;
 
 import java.util.List;
 
-@org.springframework.stereotype.Service
-@RequiredArgsConstructor
+@Service
 public class ProductService {
+    private ProductRepository productRepository;
 
-    private final ProductRepository productRepository;
-
-    public Product getProduct(long id){
-        return productRepository.findById(id);
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts(){
-        return productRepository.getAllProducts();
+    public Product findById(Long id){
+        return productRepository.findById(id).orElseThrow();
+    }
+
+    public List<Product> findAll(){
+        return productRepository.findAll();
+    }
+
+    public Product addNewProduct(String title, int cost){
+        return productRepository.saveAndFlush(new Product(title,cost));
+    }
+
+    public void deleteById(Long id){
+        productRepository.deleteById(id);
     }
 }
