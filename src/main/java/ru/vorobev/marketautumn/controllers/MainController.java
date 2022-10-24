@@ -23,7 +23,7 @@ public class MainController {
         return service.findById(id);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/get/all")
     public List<Product> getAllProduct() {
         return service.findAll();
     }

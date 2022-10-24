@@ -20,12 +20,16 @@
                 <td>ID</td>
                 <td>Название</td>
                 <td>Цена</td>
+                <td>Действия</td>
             </tr>
             <tbody>
             <tr ng-repeat="s in products">
                 <td>{{s.id}}</td>
                 <td>{{s.title}}</td>
                 <td>{{s.cost}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Удалить</button>
+                </td>
             </tbody>
         </table>
     </div>
